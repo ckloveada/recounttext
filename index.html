@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Recount Text in Sports Context | SMK Class X English</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indoRed: '#C8102E',
+                        indoRedDark: '#99001A',
+                        indoGold: '#FFC72C',
+                        indoGoldDark: '#D4A017',
+                        navyDark: '#0B132B',
+                        navyCard: '#1C2541',
+                        sportsGray: '#F4F6F9'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C8102E;
+            border-radius: 4px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(200, 16, 46, 0.1);
+        }
+        .pulse-subtle {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(255, 199, 44, 0.8); }
+            50% { border-color: rgba(200, 16, 46, 0.8); }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-indoRed selection:text-white">
+
+    <!-- Top Bar Header -->
+    <header class="bg-navyDark text-white sticky top-0 z-50 border-b-4 border-indoRed shadow-lg no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indoRed text-white p-2 rounded-xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid font-bold fa-trophy text-xl text-indoGold"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-2">
+                        SMK ENGLISH <span class="bg-indoRed text-xs px-2 py-0.5 rounded text-white font-sans uppercase">Class X</span>
+                    </h1>
+                    <p class="text-xs text-slate-300 font-medium hidden sm:block">Personal Recount Text • FIFA ASEAN Cup & Asian Games 2026</p>
+                </div>
+            </div>
+
+            <!-- Learning Progress Indicator -->
+            <div class="hidden md:flex items-center space-x-4 bg-navyCard px-4 py-2 rounded-xl border border-slate-700">
+                <div class="text-right">
+                    <div class="text-xs text-slate-300 font-medium">Progress Belajar</div>
+                    <div class="text-xs font-bold text-indoGold" id="progressText">0% Selesai</div>
+                </div>
+                <div class="w-24 bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-indoGold to-indoRed h-full transition-all duration-500 w-0"></div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-navyDark/95 z-40 hidden flex-col p-6 space-y-4 no-print text-white overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+            <span class="font-heading font-bold text-lg text-indoGold">Menu Navigasi</span>
+            <button id="closeDrawerBtn" class="text-slate-400 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-3 font-medium">
+            <button onclick="switchTab('concept')" class="mobile-nav-btn text-left p-3 rounded-lg bg-indoRed/20 hover:bg-indoRed text-white font-bold flex items-center gap-3">
+                <i class="fa-solid fa-book-open text-indoGold"></i> 1. Materi Konseptual
+            </button>
+            <button onclick="switchTab('sensory')" class="mobile-nav-btn text-left p-3 rounded-lg hover:bg-slate-800 text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-eye text-indoGold"></i> 2. Five Senses Matrix
+            </button>
+            <button onclick="switchTab('pasttense')" class="mobile-nav-btn text-left p-3 rounded-lg hover:bg-slate-800 text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-clock-rotate-left text-indoGold"></i> 3. Grammar Lab (Past Tense)
+            </button>
+            <button onclick="switchTab('lkpd')" class="mobile-nav-btn text-left p-3 rounded-lg hover:bg-slate-800 text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-pen-to-square text-indoGold"></i> 4. LKPD Interaktif & Quiz
+            </button>
+        </nav>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-navyDark via-navyCard to-indoRedDark text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-indoGold/30 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-3 text-center md:text-left max-w-2xl">
+                <div class="inline-flex items-center gap-2 bg-indoGold/20 border border-indoGold/40 text-indoGold text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <i class="fa-solid fa-bolt"></i> Modul Pembelajaran Kontekstual SMK
+                </div>
+                <h2 class="font-heading font-black text-2xl sm:text-4xl leading-tight">
+                    Live the Game, Tell the Story: <span class="text-indoGold">Supporting Team Indonesia</span>
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Pelajari cara menceritakan kembali momen epik perjuangan Timnas Indonesia di <strong class="text-white">FIFA ASEAN Cup 2026</strong> & <strong class="text-white">Asian Games 2026</strong> menggunakan <em>Personal Recount Text</em> dan <em>Sensory Words</em>.
+                </p>
+            </div>
+            <!-- Quick Event Badges -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <div class="bg-navyDark/80 border border-slate-700 p-3 rounded-xl text-center min-w-[120px] shadow-lg">
+                    <span class="block text-xs text-slate-400">Event Olahraga #1</span>
+                    <span class="font-heading font-bold text-indoGold text-sm">FIFA ASEAN Cup</span>
+                    <span class="block text-[10px] text-emerald-400 mt-1"><i class="fa-solid fa-circle text-[8px]"></i> Active Event</span>
+                </div>
+                <div class="bg-navyDark/80 border border-slate-700 p-3 rounded-xl text-center min-w-[120px] shadow-lg">
+                    <span class="block text-xs text-slate-400">Event Olahraga #2</span>
+                    <span class="font-heading font-bold text-indoGold text-sm">Asian Games 2026</span>
+                    <span class="block text-[10px] text-emerald-400 mt-1"><i class="fa-solid fa-circle text-[8px]"></i> Aichi-Nagoya</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desktop Tab Navigation -->
+    <div class="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-sm no-print hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-1 sm:space-x-4 overflow-x-auto">
+            <button onclick="switchTab('concept')" id="tab-concept" class="tab-btn px-5 py-4 font-heading font-bold text-sm border-b-2 border-indoRed text-indoRed flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-book-open"></i> 1. Materi Konseptual
+            </button>
+            <button onclick="switchTab('sensory')" id="tab-sensory" class="tab-btn px-5 py-4 font-heading font-bold text-sm border-b-2 border-transparent text-slate-600 hover:text-indoRed flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-eye"></i> 2. Five Senses Matrix
+            </button>
+            <button onclick="switchTab('pasttense')" id="tab-pasttense" class="tab-btn px-5 py-4 font-heading font-bold text-sm border-b-2 border-transparent text-slate-600 hover:text-indoRed flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-clock-rotate-left"></i> 3. Grammar Lab (Past Tense)
+            </button>
+            <button onclick="switchTab('lkpd')" id="tab-lkpd" class="tab-btn px-5 py-4 font-heading font-bold text-sm border-b-2 border-transparent text-slate-600 hover:text-indoRed flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-pen-to-square"></i> 4. LKPD Interaktif & Quiz
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ================= TAB 1: MATERI KONSEPTUAL ================= -->
+        <section id="content-concept" class="tab-content space-y-8">
+            <!-- Header Title -->
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                    <h3 class="font-heading font-bold text-2xl text-navyDark flex items-center gap-3">
+                        <span class="bg-indoRed text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">1</span>
+                        Hakikat & Struktur Personal Recount Text
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-1">Pendalaman materi teoritis recount text dalam konteks pertandingan olahraga internasional.</p>
+                </div>
+                <span class="bg-indoGold/20 text-indoRedDark border border-indoGold text-xs font-bold px-3 py-1 rounded-full hidden sm:inline-block">
+                    Materi Kelas X SMK
+                </span>
+            </div>
+
+            <!-- Concept Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Concept 1 Card -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 bg-indoRed/10 text-indoRed rounded-xl text-2xl">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-navyDark">Hakikat & Purpose (Tujuan)</h4>
+                            <p class="text-xs text-indigo-600 font-semibold mb-2">Chronological Personal Experience</p>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                <strong>Personal Recount Text</strong> adalah teks yang menceritakan kembali peristiwa atau pengalaman masa lalu yang dialami sendiri oleh penulis secara berurutan (<em>chronological order</em>).
+                            </p>
+                            <ul class="text-xs text-slate-600 space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <li class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                                    <strong>To Inform:</strong> Memberikan laporan faktual tentang momen pertandingan.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                                    <strong>To Entertain:</strong> Mengajak pembaca merasakan euforia kemenangan atau ketegangan match.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Descriptive vs Recount Comparison -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 bg-indoGold/20 text-indoGoldDark rounded-xl text-2xl">
+                            <i class="fa-solid fa-code-compare"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-navyDark">Perbedaan dengan Descriptive Text</h4>
+                            <p class="text-xs text-amber-600 font-semibold mb-2">Statis vs Dinamis</p>
+                            <div class="space-y-3 text-xs">
+                                <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                                    <span class="font-bold text-blue-900 block mb-1">Descriptive Text (Bab 1) - STATIS</span>
+                                    <p class="text-slate-600">Fokus pada gambaran wujud, ciri-ciri, dan karakter fisik atlet.</p>
+                                    <p class="italic text-slate-500 mt-1">Example: "Ragnar Oratmangoen is an agile striker with sharp instincts."</p>
+                                </div>
+                                <div class="bg-red-50 p-3 rounded-xl border border-red-100">
+                                    <span class="font-bold text-red-900 block mb-1">Personal Recount Text (Bab 2) - DINAMIS</span>
+                                    <p class="text-slate-600">Fokus pada urutan peristiwa dari awal hingga akhir pertandingan.</p>
+                                    <p class="italic text-slate-500 mt-1">Example: "Last Friday, I watched Ragnar score a brilliant goal in the 88th minute..."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generic Structure Section with Diagram -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h4 class="font-heading font-bold text-xl text-navyDark mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-sitemap text-indoRed"></i> Generic Structure Breakdown
+                </h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <!-- Orientation -->
+                    <div class="relative bg-gradient-to-b from-slate-50 to-red-50/30 p-5 rounded-xl border-l-4 border-indoRed shadow-sm hover:shadow transition-all">
+                        <span class="absolute top-3 right-3 bg-indoRed text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Part 1</span>
+                        <h5 class="font-heading font-bold text-navyDark text-base mb-1">1. Orientation</h5>
+                        <p class="text-xs text-slate-500 mb-3">Mengenalkan latar belakang (Who, Where, When, What).</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-slate-700 font-mono border border-slate-200 leading-relaxed">
+                            "Last Sunday, my friends and I watched the <strong>FIFA ASEAN Cup</strong> match between Indonesia and Vietnam live at Gelora Bung Karno Stadium."
+                        </div>
+                    </div>
+
+                    <!-- Events -->
+                    <div class="relative bg-gradient-to-b from-slate-50 to-amber-50/30 p-5 rounded-xl border-l-4 border-indoGoldDark shadow-sm hover:shadow transition-all">
+                        <span class="absolute top-3 right-3 bg-indoGoldDark text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Part 2</span>
+                        <h5 class="font-heading font-bold text-navyDark text-base mb-1">2. Series of Events</h5>
+                        <p class="text-xs text-slate-500 mb-3">Urutan kejadian kronologis selama pertandingan.</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-slate-700 font-mono border border-slate-200 leading-relaxed">
+                            "First, both teams started with high intensity. In the second half, Marselino passed the ball smoothly and scored a golden goal..."
+                        </div>
+                    </div>
+
+                    <!-- Re-orientation -->
+                    <div class="relative bg-gradient-to-b from-slate-50 to-emerald-50/30 p-5 rounded-xl border-l-4 border-emerald-600 shadow-sm hover:shadow transition-all">
+                        <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Part 3</span>
+                        <h5 class="font-heading font-bold text-navyDark text-base mb-1">3. Re-orientation</h5>
+                        <p class="text-xs text-slate-500 mb-3">Kesimpulan, perasaan pribadi, & evaluasi akhir.</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-slate-700 font-mono border border-slate-200 leading-relaxed">
+                            "Even though I was completely exhausted, I felt extremely proud to witness Team Indonesia's historical victory!"
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Accordion for Sports Ethics -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden mt-6">
+                    <button onclick="toggleAccordion('ethicsContent')" class="w-full bg-slate-900 text-white p-4 text-left font-heading font-bold flex justify-between items-center hover:bg-slate-800 transition-colors">
+                        <span class="flex items-center gap-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-handshake-angle text-indoGold"></i> 
+                            Penguatan Karakter: Sports Spectator Ethics (Etika Penonton Olahraga)
+                        </span>
+                        <i id="ethicsIcon" class="fa-solid fa-chevron-down text-indoGold transition-transform"></i>
+                    </button>
+                    <div id="ethicsContent" class="hidden p-6 bg-slate-50 border-t border-slate-200 space-y-4">
+                        <p class="text-xs text-slate-600">Sebagai siswa SMK yang berkarakter, menyampaikan recount text juga merefleksikan nilai-nilai etika suporter saat menyaksikan ajang FIFA ASEAN Cup atau Asian Games 2026:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                                <h6 class="font-bold text-emerald-900 text-xs flex items-center gap-2 mb-2">
+                                    <i class="fa-solid fa-thumbs-up text-emerald-600"></i> Positive Behaviors (Harus Ditiru)
+                                </h6>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li>Menghargai lagu kebangsaan & bendera lawan.</li>
+                                    <li>Mendukung secara kreatif (chanting, koreografi banner).</li>
+                                    <li>Melakukan <em>Clean-Up Drive</em> (membuang sampah sendiri di tribune).</li>
+                                    <li>Apresiasi perjuangan tim baik menang maupun kalah.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-rose-50 p-4 rounded-xl border border-rose-200">
+                                <h6 class="font-bold text-rose-900 text-xs flex items-center gap-2 mb-2">
+                                    <i class="fa-solid fa-thumbs-down text-rose-600"></i> Negative Behaviors (Wajib Dihindari)
+                                </h6>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li>Melakukan <em>Hooliganism</em> atau provokasi fisik & verbal.</li>
+                                    <li>Ujaran kebencian/rasialisme di stadion maupun media sosial.</li>
+                                    <li>Melempar flare, botol, atau merusak fasilitas umum.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: FIVE SENSES MATRIX ================= -->
+        <section id="content-sensory" class="tab-content hidden space-y-8">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                    <h3 class="font-heading font-bold text-2xl text-navyDark flex items-center gap-3">
+                        <span class="bg-indoRed text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">2</span>
+                        Five Senses (Sensory Details) Matrix
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-1">Eksplorasi kata sensorik untuk membuat cerita Recount hidup (*Vivid Storytelling*).</p>
+                </div>
+            </div>
+
+            <!-- Sensory Interactive Explorer Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                <!-- Sight Card -->
+                <div class="sensory-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-indoRed transition-all cursor-pointer group" onclick="highlightSensory('sight')">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-indoRed group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-base text-navyDark">1. Sight (Penglihatan)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Visual suasana pertandingan</p>
+                    <div class="space-y-1">
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Red-and-white scarves</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Bright LED lights</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Green turf field</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Tense expressions</span>
+                    </div>
+                </div>
+
+                <!-- Sound Card -->
+                <div class="sensory-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-indoRed transition-all cursor-pointer group" onclick="highlightSensory('sound')">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-indoRed group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-base text-navyDark">2. Sound (Pendengaran)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Audio & keramaian stadion</p>
+                    <div class="space-y-1">
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Deafening whistles</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Roaring chants</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Thumping drums</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Squeaking shoes</span>
+                    </div>
+                </div>
+
+                <!-- Touch Card -->
+                <div class="sensory-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-indoRed transition-all cursor-pointer group" onclick="highlightSensory('touch')">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-indoRed group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-hand-sparkles"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-base text-navyDark">3. Touch (Sentuhan)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Sensasi fisik & cuaca</p>
+                    <div class="space-y-1">
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Sticky sweat</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Cold evening breeze</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Warm high-fives</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Goosebumps</span>
+                    </div>
+                </div>
+
+                <!-- Smell Card -->
+                <div class="sensory-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-indoRed transition-all cursor-pointer group" onclick="highlightSensory('smell')">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-indoRed group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-base text-navyDark">4. Smell (Penciuman)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Aroma sekitar venue</p>
+                    <div class="space-y-1">
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Fresh cut grass</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Roasted corn aroma</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Smoky atmosphere</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Street food smell</span>
+                    </div>
+                </div>
+
+                <!-- Taste Card -->
+                <div class="sensory-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-indoRed transition-all cursor-pointer group" onclick="highlightSensory('taste')">
+                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-indoRed group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-base text-navyDark">5. Taste (Pengecapan)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Rasa camilan & minuman</p>
+                    <div class="space-y-1">
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Ice-cold mineral water</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Salty butter popcorn</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Sweet iced tea</span>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded">Savory meatballs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensory Story Preview Box -->
+            <div class="bg-navyDark text-white p-6 rounded-2xl border-2 border-indoGold shadow-xl">
+                <div class="flex items-center justify-between mb-4 border-b border-slate-700 pb-3">
+                    <h4 class="font-heading font-bold text-lg text-indoGold flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Sensory Text Live Previewer
+                    </h4>
+                    <span class="text-xs bg-indoRed px-3 py-1 rounded-full font-bold">Interactive Demo</span>
+                </div>
+                <p class="text-sm text-slate-300 leading-relaxed font-sans" id="sensoryPreviewText">
+                    "During the <strong class="text-indoGold">Asian Games 2026</strong> Badminton Finals, I sat on the crowded stands. I saw <span id="sight-tag" class="bg-blue-600/40 text-blue-200 px-1.5 py-0.5 rounded transition-all">red-and-white scarves waving everywhere</span>. The arena was filled with <span id="sound-tag" class="bg-amber-600/40 text-amber-200 px-1.5 py-0.5 rounded transition-all">deafening chants of 'INDONESIA!'</span>. I felt <span id="touch-tag" class="bg-emerald-600/40 text-emerald-200 px-1.5 py-0.5 rounded transition-all">goosebumps on my arms</span> during the match point. Outside the hall, the <span id="smell-tag" class="bg-purple-600/40 text-purple-200 px-1.5 py-0.5 rounded transition-all">aroma of roasted corn</span> lingered, while I enjoyed a cup of <span id="taste-tag" class="bg-rose-600/40 text-rose-200 px-1.5 py-0.5 rounded transition-all">sweet iced tea</span>."
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-400">
+                    <span>Klik kartu indera di atas untuk memberikan efek sorot pada kalimat contoh.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: GRAMMAR LAB (PAST TENSE) ================= -->
+        <section id="content-pasttense" class="tab-content hidden space-y-8">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                    <h3 class="font-heading font-bold text-2xl text-navyDark flex items-center gap-3">
+                        <span class="bg-indoRed text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">3</span>
+                        Grammar Lab: Simple Past Tense & Sports Verbs
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-1">Latihan penggunaan Verb 2 (Regular & Irregular) serta Time Connectives.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Verb Finder Widget -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h4 class="font-heading font-bold text-lg text-navyDark mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-indoRed"></i> Sports Verb 1 to Verb 2 Interactive Converter
+                    </h4>
+                    <p class="text-xs text-slate-500 mb-4">Cari kata kerja olahraga untuk mengetahui bentuk Past Tense (Verb 2) dan kategori perubahannya.</p>
+
+                    <!-- Search Input -->
+                    <div class="relative mb-4">
+                        <input type="text" id="verbSearchInput" onkeyup="filterVerbs()" placeholder="Ketik kata kerja (contoh: score, pass, win, run)..." class="w-full px-4 py-3 pl-10 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indoRed focus:outline-none text-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
+                    </div>
+
+                    <!-- Verbs Table -->
+                    <div class="max-h-64 overflow-y-auto custom-scrollbar border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-heading font-bold sticky top-0">
+                                <tr>
+                                    <th class="p-3">Base Form (Verb 1)</th>
+                                    <th class="p-3">Past Tense (Verb 2)</th>
+                                    <th class="p-3">Meaning (Arti)</th>
+                                    <th class="p-3">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody id="verbTableBody" class="divide-y divide-slate-100 text-slate-700">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Time Connectives Card -->
+                <div class="bg-gradient-to-br from-navyDark to-navyCard text-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-heading font-bold text-lg text-indoGold mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-timeline"></i> Time Connectives
+                        </h4>
+                        <p class="text-xs text-slate-300 mb-4">Penanda urutan waktu wajib dalam Recount Text:</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-white">First / Initially</span>
+                                <span class="text-slate-400">Awal kejadian</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-white">Then / After that</span>
+                                <span class="text-slate-400">Kejadian berikutnya</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-white">Suddenly / Meanwhile</span>
+                                <span class="text-slate-400">Momen krusial</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700 flex justify-between items-center">
+                                <span class="font-bold text-white">Finally / In the end</span>
+                                <span class="text-slate-400">Penutup pertandingan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-700 text-[11px] text-indoGold italic">
+                        Tip: Gunakan variasi connectives agar paragraf tidak monoton!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Grammar Practice Box -->
+            <div class="bg-amber-50 border border-amber-200 p-6 rounded-2xl shadow-sm">
+                <h4 class="font-heading font-bold text-base text-amber-900 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-clip text-amber-600"></i> Mini Practice: Fill in the Blank (Past Tense)
+                </h4>
+                <p class="text-xs text-slate-600 mb-4">Lengkapi kalimat di bawah dengan bentuk Past Tense (Verb 2) dari kata kerja dalam kurung.</p>
+                <form id="grammarMiniForm" class="space-y-3 text-xs sm:text-sm">
+                    <div class="flex flex-wrap items-center gap-2 bg-white p-3 rounded-xl border border-amber-100">
+                        <span>1. Indonesia</span>
+                        <input type="text" id="g1" placeholder="(win)" class="px-2 py-1 border border-slate-300 rounded w-24 text-center font-bold text-indigo-700">
+                        <span>the gold medal in the Asian Games 2026 badminton finals.</span>
+                        <span id="g1-feedback" class="font-bold text-xs"></span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 bg-white p-3 rounded-xl border border-amber-100">
+                        <span>2. The referee</span>
+                        <input type="text" id="g2" placeholder="(blow)" class="px-2 py-1 border border-slate-300 rounded w-24 text-center font-bold text-indigo-700">
+                        <span>the final whistle after 90 minutes of FIFA ASEAN Cup match.</span>
+                        <span id="g2-feedback" class="font-bold text-xs"></span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 bg-white p-3 rounded-xl border border-amber-100">
+                        <span>3. Thousands of supporters</span>
+                        <input type="text" id="g3" placeholder="(cheer)" class="px-2 py-1 border border-slate-300 rounded w-24 text-center font-bold text-indigo-700">
+                        <span>loudly when the striker scored.</span>
+                        <span id="g3-feedback" class="font-bold text-xs"></span>
+                    </div>
+                    <button type="button" onclick="checkGrammarAnswers()" class="mt-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow transition-colors">
+                        Periksa Jawaban
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: INTERACTIVE LKPD & QUIZ ================= -->
+        <section id="content-lkpd" class="tab-content hidden space-y-8">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                    <h3 class="font-heading font-bold text-2xl text-navyDark flex items-center gap-3">
+                        <span class="bg-indoRed text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm">4</span>
+                        LKPD Interaktif (Lembar Kerja Peserta Didik)
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-1">Kerjakan tugas analisis teks, kuis interaktif, dan penulisan recount text secara mandiri.</p>
+                </div>
+                <button onclick="window.print()" class="bg-navyDark hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl border border-slate-700 shadow flex items-center gap-2 no-print">
+                    <i class="fa-solid fa-print text-indoGold"></i> Cetak / Export PDF
+                </button>
+            </div>
+
+            <!-- Student Identity Input Header -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Siswa</label>
+                    <input type="text" id="studentName" placeholder="Masukkan nama Anda..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indoRed focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kelas / Program Keahlian</label>
+                    <input type="text" id="studentClass" placeholder="Contoh: X RPL 1 / X TKR 2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indoRed focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Tanggal Pengerjaan</label>
+                    <input type="date" id="studentDate" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indoRed focus:outline-none">
+                </div>
+            </div>
+
+            <!-- SECTION A: TEXT ANALYSIS EXERCISE -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <span class="bg-indoRed/10 text-indoRed font-bold text-xs px-2.5 py-1 rounded">Section A</span>
+                    <h4 class="font-heading font-bold text-base text-navyDark">Reading Comprehension & Text Feature Extraction</h4>
+                </div>
+
+                <!-- Sample Text Box -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed space-y-2">
+                    <p class="font-bold text-navyDark font-heading">Passage: Thrilling Victory at Asian Games 2026</p>
+                    <p>
+                        Last night, I sat in front of the television to watch the Asian Games 2026 badminton semifinals. At first, the room was quiet as Alwi Farhan entered the court. Suddenly, the crowd in the arena roared loudly as he delivered a powerful jump smash. My palms felt sweaty from the intense rally. Finally, when he secured the winning point, I jumped off my seat and cheered enthusiastically.
+                    </p>
+                </div>
+
+                <!-- Question Form Section A -->
+                <div class="space-y-4 text-xs">
+                    <div>
+                        <label class="block font-bold text-slate-800 mb-1">1. Temukan 3 kata kerja bentuk lampau (Past Tense / Verb 2) dari teks di atas:</label>
+                        <input type="text" id="ansA1" placeholder="Contoh: sat, entered, ..." class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-800 mb-1">2. Tuliskan 2 contoh Sensory Words (SIGHT / SOUND / TOUCH) yang ada dalam paragraf tersebut:</label>
+                        <input type="text" id="ansA2" placeholder="Contoh: roared loudly (Sound), sweaty palms (Touch)..." class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION B: MULTIPLE CHOICE QUIZ -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <span class="bg-indoRed/10 text-indoRed font-bold text-xs px-2.5 py-1 rounded">Section B</span>
+                    <h4 class="font-heading font-bold text-base text-navyDark">Multiple Choice Assessment (5 Questions)</h4>
+                </div>
+
+                <div class="space-y-6 text-xs sm:text-sm" id="mcqContainer">
+                    <!-- MCQ 1 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">1. What is the primary social function of a Personal Recount Text in sports?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="q1" value="A"> A. To describe the physical body features of an athlete.</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q1" value="B"> B. To retell personal past experiences in a sports event chronologically.</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q1" value="C"> C. To persuade readers to buy stadium match tickets.</label>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 2 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">2. Which section of Recount Text introduces WHO was involved, WHERE, and WHEN the match happened?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="q2" value="A"> A. Events</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q2" value="B"> B. Re-orientation</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q2" value="C"> C. Orientation</label>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 3 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">3. "The stadium erupted with <span class="underline font-bold">deafening whistles</span>." What sensory detail does the underlined phrase belong to?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="q3" value="A"> A. Sound</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q3" value="B"> B. Smell</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q3" value="C"> C. Taste</label>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 4 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">4. Which of the following is a POSITIVE behavior for sports spectators?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="q4" value="A"> A. Throwing flares and bottles onto the pitch after losing.</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q4" value="B"> B. Participating in clean-up drives at the tribune after the whistle.</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q4" value="C"> C. Chanting racist slurs toward opposing team players.</label>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 5 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">5. Choose the correct Past Tense (Verb 2) form for: "Ragnar _____ (dribble) past two defenders and _____ (score) a goal."</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="q5" value="A"> A. dribbled / scored</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q5" value="B"> B. dribbles / scoring</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="q5" value="C"> C. dribble / score</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-between items-center">
+                    <button type="button" onclick="gradeLKPD()" class="bg-indoRed hover:bg-indoRedDark text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-square-check"></i> Submit & Submit Auto-Grade
+                    </button>
+                    <div id="quizScoreResult" class="font-heading font-extrabold text-lg text-indigo-900 hidden"></div>
+                </div>
+            </div>
+
+            <!-- SECTION C: WRITING TASK (GUIDED RECOUNT TEXT GENERATOR) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <span class="bg-indoRed/10 text-indoRed font-bold text-xs px-2.5 py-1 rounded">Section C</span>
+                    <h4 class="font-heading font-bold text-base text-navyDark">Guided Writing Task: Menceritakan Match FIFA ASEAN Cup / Asian Games 2026</h4>
+                </div>
+                <p class="text-xs text-slate-600">
+                    Susunlah teks Recount buatanmu sendiri berdasarkan petunjuk struktur di bawah ini:
+                </p>
+
+                <div class="space-y-4 text-xs">
+                    <!-- Paragraph 1 -->
+                    <div>
+                        <label class="block font-bold text-slate-800 mb-1">Paragraf 1: Orientation (Who, Where, When, What match)</label>
+                        <textarea id="writePara1" rows="3" placeholder="Example: Last week, my friends and I watched the FIFA ASEAN Cup match between Indonesia and Malaysia..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indoRed focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Paragraph 2 -->
+                    <div>
+                        <label class="block font-bold text-slate-800 mb-1">Paragraf 2: Events (Sebutkan urutan pertandingan & minimal 2 Sensory Words)</label>
+                        <textarea id="writePara2" rows="4" placeholder="Example: In the first half, the game was intense. I heard roaring chants from the crowd..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indoRed focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Paragraph 3 -->
+                    <div>
+                        <label class="block font-bold text-slate-800 mb-1">Paragraf 3: Re-orientation (Kesan & Refleksi Etika Penonton)</label>
+                        <textarea id="writePara3" rows="3" placeholder="Example: Finally, Indonesia won 2-1. I felt extremely proud and we made sure to clean up our seats before leaving..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indoRed focus:outline-none"></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="bg-navyDark text-slate-400 py-8 border-t-4 border-indoRed text-xs no-print">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <div class="flex justify-center items-center gap-2 font-heading font-bold text-white text-sm">
+                <i class="fa-solid fa-graduation-cap text-indoGold"></i>
+                Modul Pembelajaran Bahasa Inggris Kelas X SMK
+            </div>
+            <p>Materi Pembelajaran Kontekstual Recount Text • Event FIFA ASEAN Cup & Asian Games 2026</p>
+            <p class="text-slate-500">Designed with Tailwind CSS & JavaScript for Interactive Learning</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Verbs Dataset for Grammar Lab
+        const sportsVerbs = [
+            { v1: 'score', v2: 'scored', meaning: 'mencetak gol/poin', type: 'Regular' },
+            { v1: 'pass', v2: 'passed', meaning: 'oper bola', type: 'Regular' },
+            { v1: 'cheer', v2: 'cheered', meaning: 'bersorak', type: 'Regular' },
+            { v1: 'dribble', v2: 'dribbled', meaning: 'menggiring bola', type: 'Regular' },
+            { v1: 'jump', v2: 'jumped', meaning: 'melompat', type: 'Regular' },
+            { v1: 'win', v2: 'won', meaning: 'menang', type: 'Irregular' },
+            { v1: 'blow', v2: 'blew', meaning: 'meniup (peluit)', type: 'Irregular' },
+            { v1: 'run', v2: 'ran', meaning: 'berlari', type: 'Irregular' },
+            { v1: 'see', v2: 'saw', meaning: 'melihat', type: 'Irregular' },
+            { v1: 'catch', v2: 'caught', meaning: 'menangkap', type: 'Irregular' },
+            { v1: 'kick', v2: 'kicked', meaning: 'menendang', type: 'Regular' },
+            { v1: 'shout', v2: 'shouted', meaning: 'berteriak', type: 'Regular' }
+        ];
+
+        // Correct Answers for Mini Grammar Practice
+        const grammarAnswers = {
+            g1: 'won',
+            g2: 'blew',
+            g3: 'cheered'
+        };
+
+        // MCQ Answer Key
+        const mcqKeys = {
+            q1: 'B',
+            q2: 'C',
+            q3: 'A',
+            q4: 'B',
+            q5: 'A'
+        };
+
+        window.onload = function() {
+            populateVerbTable(sportsVerbs);
+            document.getElementById('studentDate').valueAsDate = new Date();
+            updateProgress(25);
+        };
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.remove('hidden');
+            document.getElementById('mobileDrawer').classList.add('flex');
+        });
+        document.getElementById('closeDrawerBtn').addEventListener('click', () => {
+            document.getElementById('mobileDrawer').classList.add('hidden');
+            document.getElementById('mobileDrawer').classList.remove('flex');
+        });
+
+        // Tab Switcher
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            // Reset tab button styles
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-indoRed', 'text-indoRed');
+                btn.classList.add('border-transparent', 'text-slate-600');
+            });
+
+            // Show selected content
+            const activeContent = document.getElementById('content-' + tabName);
+            if (activeContent) activeContent.classList.remove('hidden');
+
+            // Highlight selected desktop button
+            const activeTabBtn = document.getElementById('tab-' + tabName);
+            if (activeTabBtn) {
+                activeTabBtn.classList.remove('border-transparent', 'text-slate-600');
+                activeTabBtn.classList.add('border-indoRed', 'text-indoRed');
+            }
+
+            // Close mobile drawer if open
+            document.getElementById('mobileDrawer').classList.add('hidden');
+
+            // Update Progress Tracker
+            let prog = 25;
+            if (tabName === 'sensory') prog = 50;
+            if (tabName === 'pasttense') prog = 75;
+            if (tabName === 'lkpd') prog = 100;
+            updateProgress(prog);
+        }
+
+        function updateProgress(percent) {
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressText').innerText = percent + '% Selesai';
+        }
+
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById('ethicsIcon');
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                el.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function highlightSensory(sense) {
+            const tags = ['sight', 'sound', 'touch', 'smell', 'taste'];
+            tags.forEach(t => {
+                const el = document.getElementById(t + '-tag');
+                if (el) {
+                    if (t === sense) {
+                        el.classList.add('ring-2', 'ring-indoGold', 'scale-105', 'font-bold');
+                    } else {
+                        el.classList.remove('ring-2', 'ring-indoGold', 'scale-105', 'font-bold');
+                    }
+                }
+            });
+        }
+
+        function populateVerbTable(data) {
+            const tbody = document.getElementById('verbTableBody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-slate-900">${item.v1}</td>
+                    <td class="p-3 font-bold text-indigo-700">${item.v2}</td>
+                    <td class="p-3">${item.meaning}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.type === 'Regular' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${item.type}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterVerbs() {
+            const query = document.getElementById('verbSearchInput').value.toLowerCase();
+            const filtered = sportsVerbs.filter(item => 
+                item.v1.toLowerCase().includes(query) || 
+                item.v2.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+            populateVerbTable(filtered);
+        }
+
+        function checkGrammarAnswers() {
+            let correctCount = 0;
+            for (let key in grammarAnswers) {
+                const userVal = document.getElementById(key).value.trim().toLowerCase();
+                const feedbackEl = document.getElementById(key + '-feedback');
+                if (userVal === grammarAnswers[key]) {
+                    feedbackEl.innerText = '✓ Correct';
+                    feedbackEl.className = 'font-bold text-xs text-emerald-600';
+                    correctCount++;
+                } else {
+                    feedbackEl.innerText = '✗ Answer: ' + grammarAnswers[key];
+                    feedbackEl.className = 'font-bold text-xs text-rose-600';
+                }
+            }
+        }
+
+        function gradeLKPD() {
+            let mcqScore = 0;
+            const totalMcq = 5;
+
+            for (let i = 1; i <= totalMcq; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === mcqKeys[`q${i}`]) {
+                    mcqScore += 20; // 20 pts per question = 100 max
+                }
+            }
+
+            const resultDiv = document.getElementById('quizScoreResult');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `<span class="text-xs text-slate-500 font-sans block">Nilai Pilihan Ganda:</span> <span class="${mcqScore >= 70 ? 'text-emerald-600' : 'text-amber-600'}">${mcqScore} / 100</span>`;
+            
+            alert(`Pengerjaan berhasil dikirim!\nSkor Pilihan Ganda Anda: ${mcqScore}/100.\nJangan lupa isi bagian C (Guided Writing) sebelum dicetak.`);
+        }
+    </script>
+</body>
+</html>
